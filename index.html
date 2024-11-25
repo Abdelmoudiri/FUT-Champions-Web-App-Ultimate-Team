@@ -1,12 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="./asset/css/style.css" />
+  </head>
 
-</body>
-<script src="./asset/js/script.js"></script></html>
+  <body>
+    <!-- Header -->
+    <header class="bg-slate-500 p-4">
+      <img
+        src="./asset/img/team.png"
+        class="w-[10%] h-[10%] mx-auto"
+        alt="logo de mon site"
+      />
+    </header>
+
+    <!-- Main Section  -->
+    <main class="grid grid-cols-2 gap-4 p-4 h-[100vh]">
+      <section class="bg-gray-200 p-4">
+        <h2>Section 1</h2>
+        <p>Content for the first section.</p>
+        <!-- kkk -->
+        <!-- Wrapper -->
+        <!-- Wrapper -->
+        <!-- Wrapper -->
+        <div
+          class="relative flex items-center justify-center w-full h-screen min-h-[500px]"
+        >
+          <!-- Player Card -->
+          <div
+            class="relative w-[200px] h-[320px] bg-cover bg-center p-[2rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in"
+          >
+            <!-- Player Card Top -->
+            <div class="relative flex text-[#e9cc74] px-[1rem]">
+              <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
+                <div class="text-[1.2rem]">97</div>
+                <!-- Player Rating -->
+                <div class="text-[1rem]">RW</div>
+                <!-- Player Position -->
+                <div class="block my-[0.3rem_0]">
+                  <img
+                    src="https://selimdoyranli.com/cdn/fut-player-card/img/argentina.svg"
+                    alt="Argentina"
+                    class="w-[1.3rem] h-[18px] object-contain"
+                  />
+                </div>
+                <!-- Player Nation -->
+                <div class="block">
+                  <img
+                    src="https://selimdoyranli.com/cdn/fut-player-card/img/barcelona.svg"
+                    alt="Barcelona"
+                    class="w-[1.4rem] h-[25px] object-contain"
+                  />
+                </div>
+                <!-- Player Club -->
+              </div>
+              <div class="w-[130px] h-[130px] mx-auto overflow-hidden">
+                <img
+                  src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png"
+                  alt="Messi"
+                  class="w-full h-full object-contain relative right-[-1rem] bottom-0"
+                />
+                <div
+                  class="absolute right-0 bottom-[-0.5rem] w-full h-[1.2rem] text-right text-[#333] text-[0.7rem] font-bold uppercase"
+                >
+                  <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                  <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                </div>
+                <!-- Extra Info -->
+              </div>
+            </div>
+            <!-- End Player Card Top -->
+
+            <!-- Player Card Bottom -->
+            <div class="relative">
+              <div class="text-[#e9cc74] w-[90%] mx-auto">
+                <div
+                  class="text-center text-[1.2rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.3rem]"
+                >
+                  <span class="block text-shadow-lg">MESSI</span>
+                  <!-- Player Name -->
+                </div>
+                <div class="flex justify-center mt-[0.3rem]">
+                  <div class="pr-[1.5rem] border-r-2 border-[#e9cc74]/[0.1]">
+                    <div class="flex items-center text-[0.9rem] uppercase">
+                      <span class="font-bold mr-[0.3rem]">97</span>
+                      <!-- PAC -->
+                      <span class="font-light">PAC</span>
+                    </div>
+                    <div class="flex items-center text-[0.9rem] uppercase">
+                      <span class="font-bold mr-[0.3rem]">95</span>
+                      <!-- SHO -->
+                      <span class="font-light">SHO</span>
+                    </div>
+                    <div class="flex items-center text-[0.9rem] uppercase">
+                      <span class="font-bold mr-[0.3rem]">94</span>
+                      <!-- PAS -->
+                      <span class="font-light">PAS</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex items-center text-[0.9rem] uppercase">
+                      <span class="font-bold mr-[0.3rem]">99</span>
+                      <!-- DRI -->
+                      <span class="font-light">DRI</span>
+                    </div>
+                    <div class="flex items-center text-[0.9rem] uppercase">
+                      <span class="font-bold mr-[0.3rem]">35</span>
+                      <!-- DEF -->
+                      <span class="font-light">DEF</span>
+                    </div>
+                    <div class="flex items-center text-[0.9rem] uppercase">
+                      <span class="font-bold mr-[0.3rem]">68</span>
+                      <!-- PHY -->
+                      <span class="font-light">PHY</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Player Features -->
+              </div>
+            </div>
+            <!-- End Player Card Bottom -->
+          </div>
+          <!-- End Player Card -->
+        </div>
+        <!-- End Wrapper -->
+
+      </section>
+
+      <section class="grid grid-cols-5 grid-rows-5 bg-gray-300 p-4 bg-[url(./asset/img/pitch.svg)]">
+
+        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Goalkeeper"></div>
+        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Defender 1"></div>
+        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Defender 2"></div>
+        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Defender 3"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Defender 4"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Midfielder 1"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Midfielder 2"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Midfielder 3"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Forward 1"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Forward 2"></div>
+        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Forward 3"></div>
+
+    </section>
+      
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-500 p-4 text-center text-white">
+      <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+  </body>
+  <script src="./asset/js/script.js"></script>
+</html>
