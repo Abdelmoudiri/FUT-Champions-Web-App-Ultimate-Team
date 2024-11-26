@@ -177,7 +177,7 @@ function positionFliter(position){
 }
 
 
-fetch('/players.json')
+fetch('players.json')
   .then(response => response.json())
   .then(data => {
     localStorage.setItem('allplayers',JSON.stringify(data.players))
