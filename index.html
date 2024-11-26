@@ -11,49 +11,43 @@
   <body class="m-0 p-0">
 <!-- Header -->
 
-    <header class="bg-slate-500 p-4">
-      <img
-        src="./asset/img/team.png"
-        class="w-[10%] h-[10%] mx-auto"
-        alt="logo de mon site"
-      />
+    <header class="bg-slate-500 p-4 rounded-md">
+      <img src="./asset/img/team.png" class="w-[5%] h-[2%] mx-auto" alt="logo de mon site"/>
     </header>
 
  
 
-<form id="crud-modal" tabindex="-1" aria-hidden="true"  class="flex  overflow-y-auto overflow-x-hidden  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]  max-h-full">
-    <div class="relative p-3 w-full max-w-[50%] max-h-full ">
-        <div class="bg-red px-[3%] rounded-lg shadow dark:bg-gray-700">
-            
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center  w-[90%]">choisi nouvelle joueur</h3>
-            </div>
-
-            <form class="modal_form p-4 md:p-5 flex justify-center">
-                <!-- pour afficher les sugestion -->
-                <div id="div_choisi_joueur" class="grid gap-4 mb-4 grid-cols-2">  
-                </div>
-                <!--  pour ajouter un nouvell joueur -->
-                <div class="flex justify-center ">
-                    <button id="validerAjoute" type="submit" class="text-white mb-[2%]  inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                    Ajouter Nouvelle joueur
-                    </button>
-                </div>
-                
-            </form>
+    <section id="crud-modal" class="hidden w-fit relative mx-auto bg-slate-900">
+        <!-- Close Button -->
+        <button id="btnClose" class="close-btn absolute top-2 right-2 text-white font-bold text-xl" >×</button>
+        
+        <!-- Modal Header -->
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center w-[90%]">choisi nouvelle joueur</h3>
+      
+        <!-- Joueurs Suggestions Section -->
+        <div id="div_choisi_joueur" class="grid grid-cols-3 gap-3 mx-auto bg-slate-900 w-fit">
+          <!-- Player suggestions will go here -->
         </div>
-    </div>
-
-</form>
+      
+        <!-- Button to Add New Player -->
+        <div class="flex justify-center">
+          <button id="validerAjoute" class="text-white mb-[2%] inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+            </svg>
+            Ajouter Nouvelle joueur
+          </button>
+        </div>
+    </section>
+      
 
     <!-- main -->
-    <main class="grid grid-cols-2" >
+    <main class="grid grid-cols-3" >
 
-      <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 ">   
+      <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto">   
       </section>
 
-      <section class="m-4 grid grid-cols-5 max-h-screen grid-rows-5 bg-gray-300  p-4 bg-[url(./asset/img/pitch.svg)] rounded-md">
+      <section class="m-4 grid grid-cols-5 max-h-screen min-h-screen grid-rows-5 bg-gray-300  p-4 bg-[url(./asset/img/pitch.svg)] rounded-md">
 
         <!-- GK -->
         <div class="col-span-1 row-span-1 hover:shadow-orange-600 hover:shadow-sm  hover:cursor-pointer col-start-3 row-start-1">
@@ -100,7 +94,10 @@
         </div>
     
     </section>
-    
+
+    <section id="Bonne_touche" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto"> 
+        <h1>Les Changements </h1>  
+    </section>
     </main>
 
     <!-- Footer -->
