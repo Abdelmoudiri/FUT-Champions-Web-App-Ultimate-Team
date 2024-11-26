@@ -25,7 +25,7 @@ btnClose.addEventListener("click", function() {
 
 
 function idealeplayer(element){
-
+playeDiv=''
   element.forEach(player => {
   playeDiv=document.createElement('div');
   playeDiv.setAttribute('draggable', 'true');
