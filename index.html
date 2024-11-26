@@ -19,20 +19,21 @@
       />
     </header>
 
-<!-- main -->
  
 
-<form id="crud-modal" tabindex="-1" aria-hidden="true"  class="hidden flex  overflow-y-auto overflow-x-hidden  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]  max-h-full">
+<form id="crud-modal" tabindex="-1" aria-hidden="true"  class="flex  overflow-y-auto overflow-x-hidden  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]  max-h-full">
     <div class="relative p-3 w-full max-w-[50%] max-h-full ">
         <div class="bg-red px-[3%] rounded-lg shadow dark:bg-gray-700">
+            
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center  w-[90%]">choisi nouvelle joueur</h3>
             </div>
+
             <form class="modal_form p-4 md:p-5 flex justify-center">
-                <div id="div_choisi_joueur" class="grid gap-4 mb-4 grid-cols-2">
-                  
-                   
+                <!-- pour afficher les sugestion -->
+                <div id="div_choisi_joueur" class="grid gap-4 mb-4 grid-cols-2">  
                 </div>
+                <!--  pour ajouter un nouvell joueur -->
                 <div class="flex justify-center ">
                     <button id="validerAjoute" type="submit" class="text-white mb-[2%]  inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
@@ -46,6 +47,7 @@
 
 </form>
 
+    <!-- main -->
     <main class="grid grid-cols-2" >
 
       <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 ">   
@@ -53,26 +55,27 @@
 
       <section class="m-4 grid grid-cols-5 max-h-screen grid-rows-5 bg-gray-300  p-4 bg-[url(./asset/img/pitch.svg)] rounded-md">
 
-        <!-- Gardien au centre de la première colonne -->
+        <!-- GK -->
         <div class="col-span-1 row-span-1 hover:shadow-orange-600 hover:shadow-sm  hover:cursor-pointer col-start-3 row-start-1">
-            <img src="./asset/img/add-player.png" alt="Goalkeeper" onclick="fuckFliter('gk')">
+            <img src="./asset/img/add-player.png" alt="Goalkeeper" onclick="positionFliter('gk')">
         </div>
     
-        <!-- Défensse -->
+        <!-- RB -->
         <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-1 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 1" onclick="fuckFliter('rb')">
+            <img src="./asset/img/add-player.png" alt="Defender 1" onclick="positionFliter('rb')">
         </div>
-    
+        <!-- CB -->
         <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-2 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 2" onclick="fuckFliter('cb')">
+            <img src="./asset/img/add-player.png" alt="Defender 2" onclick="positionFliter('cb')">
         </div>
-    
+        <!-- CB -->
+
         <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-4 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 3"onclick="fuckFliter('cb')">
+            <img src="./asset/img/add-player.png" alt="Defender 3"onclick="positionFliter('cb')">
         </div>
     
         <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-5 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 4"onclick="fuckFliter('lb')">
+            <img src="./asset/img/add-player.png" alt="Defender 4"onclick="positionFliter('lb')">
         </div>
     
         <!-- milieu -->

@@ -87,7 +87,7 @@ showAllplzyerSection.appendChild(playeDiv)
     console.log(player.name);
   });
 }
-function fuckFliter(position){
+function positionFliter(position){
     let temData = Allplayers.filter((player) => player.position.toLowerCase() === position);
     console.log("haris is", temData);
 }
@@ -101,9 +101,3 @@ fetch('/players.json')
     getPlayers(); 
 })
 .catch(error => console.error('Error fetching JSON:', error));
-
-
-
-
-
-
