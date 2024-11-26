@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="./asset/css/style.css" />
   </head>
 
-  <body>
-    <!-- Header -->
+  <body class="m-0 p-0">
+<!-- Header -->
+
     <header class="bg-slate-500 p-4">
       <img
         src="./asset/img/team.png"
@@ -18,135 +19,85 @@
       />
     </header>
 
-    <!-- Main Section  -->
-    <main class="grid grid-cols-2 gap-4 p-4 h-[100vh]">
-      <section class="bg-gray-200 p-4">
-        <h2>Section 1</h2>
-        <p>Content for the first section.</p>
-        <!-- kkk -->
-        <!-- Wrapper -->
-        <!-- Wrapper -->
-        <!-- Wrapper -->
-        <div
-          class="relative flex items-center justify-center w-full h-screen min-h-[500px]"
-        >
-          <!-- Player Card -->
-          <div
-            class="relative w-[200px] h-[320px] bg-cover bg-center p-[2rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in"
-          >
-            <!-- Player Card Top -->
-            <div class="relative flex text-[#e9cc74] px-[1rem]">
-              <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
-                <div class="text-[1.2rem]">97</div>
-                <!-- Player Rating -->
-                <div class="text-[1rem]">RW</div>
-                <!-- Player Position -->
-                <div class="block my-[0.3rem_0]">
-                  <img
-                    src="https://selimdoyranli.com/cdn/fut-player-card/img/argentina.svg"
-                    alt="Argentina"
-                    class="w-[1.3rem] h-[18px] object-contain"
-                  />
-                </div>
-                <!-- Player Nation -->
-                <div class="block">
-                  <img
-                    src="https://selimdoyranli.com/cdn/fut-player-card/img/barcelona.svg"
-                    alt="Barcelona"
-                    class="w-[1.4rem] h-[25px] object-contain"
-                  />
-                </div>
-                <!-- Player Club -->
-              </div>
-              <div class="w-[130px] h-[130px] mx-auto overflow-hidden">
-                <img
-                  src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png"
-                  alt="Messi"
-                  class="w-full h-full object-contain relative right-[-1rem] bottom-0"
-                />
-                <div
-                  class="absolute right-0 bottom-[-0.5rem] w-full h-[1.2rem] text-right text-[#333] text-[0.7rem] font-bold uppercase"
-                >
-                  <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
-                  <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
-                </div>
-                <!-- Extra Info -->
-              </div>
-            </div>
-            <!-- End Player Card Top -->
+<!-- main -->
+ 
 
-            <!-- Player Card Bottom -->
-            <div class="relative">
-              <div class="text-[#e9cc74] w-[90%] mx-auto">
-                <div
-                  class="text-center text-[1.2rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.3rem]"
-                >
-                  <span class="block text-shadow-lg">MESSI</span>
-                  <!-- Player Name -->
-                </div>
-                <div class="flex justify-center mt-[0.3rem]">
-                  <div class="pr-[1.5rem] border-r-2 border-[#e9cc74]/[0.1]">
-                    <div class="flex items-center text-[0.9rem] uppercase">
-                      <span class="font-bold mr-[0.3rem]">97</span>
-                      <!-- PAC -->
-                      <span class="font-light">PAC</span>
-                    </div>
-                    <div class="flex items-center text-[0.9rem] uppercase">
-                      <span class="font-bold mr-[0.3rem]">95</span>
-                      <!-- SHO -->
-                      <span class="font-light">SHO</span>
-                    </div>
-                    <div class="flex items-center text-[0.9rem] uppercase">
-                      <span class="font-bold mr-[0.3rem]">94</span>
-                      <!-- PAS -->
-                      <span class="font-light">PAS</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="flex items-center text-[0.9rem] uppercase">
-                      <span class="font-bold mr-[0.3rem]">99</span>
-                      <!-- DRI -->
-                      <span class="font-light">DRI</span>
-                    </div>
-                    <div class="flex items-center text-[0.9rem] uppercase">
-                      <span class="font-bold mr-[0.3rem]">35</span>
-                      <!-- DEF -->
-                      <span class="font-light">DEF</span>
-                    </div>
-                    <div class="flex items-center text-[0.9rem] uppercase">
-                      <span class="font-bold mr-[0.3rem]">68</span>
-                      <!-- PHY -->
-                      <span class="font-light">PHY</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Player Features -->
-              </div>
+<form id="crud-modal" tabindex="-1" aria-hidden="true"  class="hidden flex  overflow-y-auto overflow-x-hidden  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]  max-h-full">
+    <div class="relative p-3 w-full max-w-[50%] max-h-full ">
+        <div class="bg-red px-[3%] rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center  w-[90%]">choisi nouvelle joueur</h3>
             </div>
-            <!-- End Player Card Bottom -->
-          </div>
-          <!-- End Player Card -->
+            <form class="modal_form p-4 md:p-5 flex justify-center">
+                <div id="div_choisi_joueur" class="grid gap-4 mb-4 grid-cols-2">
+                  
+                   
+                </div>
+                <div class="flex justify-center ">
+                    <button id="validerAjoute" type="submit" class="text-white mb-[2%]  inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    Ajouter Nouvelle joueur
+                    </button>
+                </div>
+                
+            </form>
         </div>
-        <!-- End Wrapper -->
+    </div>
 
+</form>
+
+    <main class="grid grid-cols-2" >
+
+      <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 ">   
       </section>
 
-      <section class="grid grid-cols-5 grid-rows-5 bg-gray-300 p-4 bg-[url(./asset/img/pitch.svg)]">
+      <section class="m-4 grid grid-cols-5 max-h-screen grid-rows-5 bg-gray-300  p-4 bg-[url(./asset/img/pitch.svg)] rounded-md">
 
-        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Goalkeeper"></div>
-        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Defender 1"></div>
-        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Defender 2"></div>
-        <div class="col-span-1 row-span-1 col-start-3 row-start-5"><img src="./asset/img/add-player.png" alt="Defender 3"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Defender 4"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Midfielder 1"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Midfielder 2"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Midfielder 3"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Forward 1"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Forward 2"></div>
-        <div class="col-span-1 row-span-1"><img src="./asset/img/add-player.png" alt="Forward 3"></div>
-
+        <!-- Gardien au centre de la première colonne -->
+        <div class="col-span-1 row-span-1 hover:shadow-orange-600 hover:shadow-sm  hover:cursor-pointer col-start-3 row-start-1">
+            <img src="./asset/img/add-player.png" alt="Goalkeeper" onclick="fuckFliter('gk')">
+        </div>
+    
+        <!-- Défensse -->
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-1 row-start-2">
+            <img src="./asset/img/add-player.png" alt="Defender 1" onclick="fuckFliter('rb')">
+        </div>
+    
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-2 row-start-2">
+            <img src="./asset/img/add-player.png" alt="Defender 2" onclick="fuckFliter('cb')">
+        </div>
+    
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-4 row-start-2">
+            <img src="./asset/img/add-player.png" alt="Defender 3"onclick="fuckFliter('cb')">
+        </div>
+    
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-5 row-start-2">
+            <img src="./asset/img/add-player.png" alt="Defender 4"onclick="fuckFliter('lb')">
+        </div>
+    
+        <!-- milieu -->
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-2 row-start-3">
+            <img src="./asset/img/add-player.png" alt="Midfielder 1">
+        </div>
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-3 row-start-3">
+            <img src="./asset/img/add-player.png" alt="Midfielder 2">
+        </div>
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-4 row-start-3">
+            <img src="./asset/img/add-player.png" alt="Midfielder 3">
+        </div>
+        <!-- attaque -->
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-1 row-start-4">
+            <img src="./asset/img/add-player.png" alt="Forward 1">
+        </div>
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-3 row-start-5">
+            <img src="./asset/img/add-player.png" alt="Forward 2">
+        </div>
+        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-5 row-start-4">
+            <img src="./asset/img/add-player.png" alt="Forward 3">
+        </div>
+    
     </section>
-      
+    
     </main>
 
     <!-- Footer -->
