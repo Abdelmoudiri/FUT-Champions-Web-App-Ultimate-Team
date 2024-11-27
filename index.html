@@ -1,110 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./asset/css/style.css" />
-  </head>
 
-  <body class="m-0 p-0">
-<!-- Header -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./asset/css/style.css" />
+</head>
 
-    <header class="bg-slate-500 p-4 rounded-md">
-      <img src="./asset/img/team.png" class="w-[5%] h-[2%] mx-auto" alt="logo de mon site"/>
-    </header>
+<body class="m-0 p-0">
+  <!-- Header -->
 
- 
+  <header class="bg-slate-500 p-2 rounded-md">
+    <img src="./asset/img/team.png" class="w-[5%] h-[2%] mx-auto" alt="logo de mon site" />
+  </header>
 
-    <section id="crud-modal" class="hidden w-fit relative mx-auto bg-slate-900">
-        <!-- Close Button -->
-        <button id="btnClose" class="close-btn absolute top-2 right-2 text-white font-bold text-xl" >×</button>
+  <!-- poopup de selection -->
+  <section id="crud-modal" class="border-g modal bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden">
+    <button id="btnClose" class="absolute top-2 right-2 text-white font-bold text-xl" aria-label="Close modal">
+      &times;
+    </button>
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center w-[90%]">choisi nouvelle joueur</h3>
+    <div id="div_choisi_joueur" class="grid grid-cols-3 gap-3 mx-auto bg-slate-900 w-fit">
+    </div>
+    <div class="flex justify-center">
+      <button id="btnAjoute"
+        class="text-white mb-[2%] inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+        Ajouter Nouvelle joueur
+      </button>
+    </div>
+  </section>
+
+  <!-- poopup -->
+
+  <div id="Div_add_player" class="hidden w-[30vw] mx-auto bg-gradient-to-br from-purple-800 via-blue-700 to-blue-500  h-[60vh] text-center rounded-xl shadow-xl  text-white  ">
+    <h1 class="text-xl font-bold text-center">Player Information</h1>
+    <form id="playerForm" class="bg-gray-800 p-3  rounded-lg shadow-md w-[90%] h-[55vh] mx-auto">
+      <h2 class="text-2xl font-bold ">Add New Player</h2>
+      
+      <!-- Player Name -->
+      <div class="">
+        <label for="name" class="block  text-sm">Player Name</label>
+        <input type="text" id="name" name="name" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-300" placeholder="Enter player name" required>
+      </div>
+  
+      <div id="generalStats" class="grid grid-cols-2 gap-2">
+      <!-- Player Position -->
+        <div >
+          <label for="position" class="block text-sm">Position</label>
+          <select id="position" name="position" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100" required onchange="toggle()">
+            <option value="ST">ST</option>
+            <option value="CM">CM</option>
+            <option value="LW">LW</option>
+            <option value="RW">RW</option>
+            <option value="CB">CB</option>
+            <option value="GK">GK</option>
+          </select>
+        </div>
+        <div>
+          <label for="image" class="block  text-sm">Image</label>
+          <input type="file" name="image" id="image" accept=".png" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
         
-        <!-- Modal Header -->
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center w-[90%]">choisi nouvelle joueur</h3>
-      
-        <!-- Joueurs Suggestions Section -->
-        <div id="div_choisi_joueur" class="grid grid-cols-3 gap-3 mx-auto bg-slate-900 w-fit">
-          <!-- Player suggestions will go here -->
+      <!-- General Stats -->
+        <div>
+          <label for="pace" class="block  text-sm">PAC</label>
+          <input type="number" id="pace" name="pace" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
-      
-        <!-- Button to Add New Player -->
-        <div class="flex justify-center">
-          <button id="validerAjoute" class="text-white mb-[2%] inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-            </svg>
-            Ajouter Nouvelle joueur
-          </button>
+        <div>
+          <label for="shooting" class="block  text-sm">SHO</label>
+          <input type="number" id="shooting" name="shooting" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
+        <div>
+          <label for="passing" class="block  text-sm">PAS</label>
+          <input type="number" id="passing" name="passing" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="dribbling" class="block  text-sm">DRI</label>
+          <input type="number" id="dribbling" name="dribbling" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="defending" class="block  text-sm">DEF</label>
+          <input type="number" id="defending" name="defending" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="physical" class="block text-sm">PHY</label>
+          <input type="number" id="physical" name="physical" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+      </div>
+  
+      <!-- Goalkeeper-Specific Stats -->
+      <div id="goalkeeperStats" class="grid grid-cols-2 gap-4 hidden mt-4">
+        <div>
+          <label for="diving" class="block mb-1 text-lg">DIV</label>
+          <input type="number" id="diving" name="diving" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="handling" class="block mb-1 text-lg">HAN</label>
+          <input type="number" id="handling" name="handling" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="kicking" class="block mb-1 text-lg">KIC</label>
+          <input type="number" id="kicking" name="kicking" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="reflexes" class="block mb-1 text-lg">REF</label>
+          <input type="number" id="reflexes" name="reflexes" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="speed" class="block mb-1 text-lg">SPD</label>
+          <input type="number" id="speed" name="speed" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+        <div>
+          <label for="positioning" class="block mb-1 text-lg">POS</label>
+          <input type="number" id="positioning" name="positioning" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-300">
+        </div>
+        <!-- File input for Goalkeeper -->
+        <div>
+          <label for="image" class="block mb-1 text-lg">Image</label>
+          <input type="file" name="image" id="image" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-lg font-bold py-3 rounded-lg transition-all">
+      Ajouter le joueur
+      </button>
+    </form>
+  </div>
+
+  <!-- main -->
+  <main class="grid grid-cols-4 p-3">
+
+    <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto">
     </section>
-      
 
-    <!-- main -->
-    <main class="grid grid-cols-3" >
-
-      <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto">   
-      </section>
-
-      <section class="m-4 grid grid-cols-5 max-h-screen min-h-screen grid-rows-5 bg-gray-300  p-4 bg-[url(./asset/img/pitch.svg)] rounded-md">
-
-        <!-- GK -->
-        <div onclick="positionFliter('gk',this)" class="col-span-1 row-span-1 hover:shadow-orange-600 hover:shadow-sm  hover:cursor-pointer col-start-3 row-start-1">
-            <img src="./asset/img/add-player.png" alt="Goalkeeper" >
+    <section class=" grid grid-rows-4 max-h-screen min-h-screen col-span-2 bg-gray-300 bg-[url(./asset/img/pitch.svg)] rounded-md">
+      <!-- attaque -->
+      <div class="flex justify-around ">
+        <!-- LW -->
+        <div id="LW" onclick="positionFliter('lw',this)" class="relative hover:shadow-sm hover:cursor-pointer ">
+          <img id="L" src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
         </div>
-    
+        <!-- ST -->
+        <div id="ST" onclick="positionFliter('st',this)" class="hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+        <!-- RW -->
+        <div id="RW" onclick="positionFliter('rw',this)" class=" hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+      </div>
+
+      <!-- milieu -->
+      <div  class="flex justify-around ">
+        <!-- CM -->
+        <div id="CM" onclick="positionFliter('cm',this)" class=" hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+        <div id="CM-1"onclick="positionFliter('cm',this)" class="hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+        <div id="CM-2"onclick="positionFliter('cm',this)" class=" hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+      </div>
+      <!-- diffence -->
+      <div  class="flex justify-around ">
+        <!-- LB -->
+        <div id="LB" onclick="positionFliter('lb',this)" class=" hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+        <!-- CB -->
+        <div id="CB" onclick="positionFliter('cb',this)" class="hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
+        <!-- CB -->
+        <div id="CB-1" onclick="positionFliter('cb',this)" class=" hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        </div>
         <!-- RB -->
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-1 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 1" onclick="positionFliter('rb',this)">
+        <div id="RB" onclick="positionFliter('rb',this)" class=" hover:shadow-sm hover:cursor-pointer ">
+          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
         </div>
-        <!-- CB -->
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-2 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 2" onclick="positionFliter('cb')">
-        </div>
-        <!-- CB -->
+      </div>
+      <!-- goal keeper -->
+      <div id="Gk" onclick="positionFliter('gk',this)" class="flex justify-center hover:shadow-sm hover:cursor-pointer ">
+        <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+      </div>
 
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-4 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 3"onclick="positionFliter('cb')">
-        </div>
-    
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-5 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 4"onclick="positionFliter('lb')">
-        </div>
-    
-        <!-- milieu -->
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-2 row-start-3">
-            <img src="./asset/img/add-player.png" alt="Midfielder 1">
-        </div>
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-3 row-start-3">
-            <img src="./asset/img/add-player.png" alt="Midfielder 2">
-        </div>
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-4 row-start-3">
-            <img src="./asset/img/add-player.png" alt="Midfielder 3">
-        </div>
-        <!-- attaque -->
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-1 row-start-4">
-            <img src="./asset/img/add-player.png" alt="Forward 1">
-        </div>
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-3 row-start-5">
-            <img src="./asset/img/add-player.png" alt="Forward 2">
-        </div>
-        <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-5 row-start-4">
-            <img src="./asset/img/add-player.png" alt="Forward 3">
-        </div>
-    
     </section>
 
-    <section id="Bonne_touche" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto"> 
-        <h1>Les Changements </h1>  
+    <section id="Bonne_touche" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto">
+      <h1>Les Changements </h1>
     </section>
-    </main>
+  </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-500 p-4 text-center text-white">
-      <p>&copy; 2024 Your Website. All rights reserved.</p>
-    </footer>
+  <!-- Footer -->
+  <footer class="bg-slate-500 p-4 text-center text-white">
+    <p>&copy; 2024 Your Website. All rights reserved.</p>
+  </footer>
   <script src="./asset/js/script.js"></script>
 
-  </body>
+</body>
+
 </html>
