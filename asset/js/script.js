@@ -18,19 +18,21 @@ function toggleVisibility(element) {
   }
 }
 
-// Assuming btnClose is the button to close the modal
 btnClose.addEventListener("click", function() {
   toggleVisibility(crud_modal);
 });
 
 
-function idealeplayer(element){
-playeDiv=''
+function idealeplayer(element,diva){
+  divChoisiJoueur.innerHTML='';
+  
   element.forEach(player => {
+
   playeDiv=document.createElement('div');
+  
   playeDiv.setAttribute('draggable', 'true');
   playeDiv.className="relative flex items-center justify-cente"
-  playeDiv.innerHTML=`<div class="relative w-[100px] h-[180px] bg-cover bg-center  bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+  playeDiv.innerHTML=`<div id='${player.id}' onclick="fuck(this,${diva})"  class="relative w-[100px] h-[180px] bg-cover bg-center  bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
               <div class="relative flex text-[#e9cc74] px-[0.3rem]">
                 <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
                   <div class="text-[1rem] mt-5">97</div>
@@ -93,8 +95,9 @@ playeDiv=''
             </div>
           </div>`
           divChoisiJoueur.appendChild(playeDiv)
-
-    console.log(player.name);
+          playeDiv.addEventListener("click", function(){
+            diva.appendChild(playeDiv);
+          });
   });
 }
 function getPlayers() {
@@ -166,25 +169,33 @@ function getPlayers() {
           </div>`
 showAllplzyerSection.appendChild(playeDiv)
 
-    console.log(player.name);
   });
 }
-function positionFliter(position){
+function positionFliter(position,diva){
+ 
     temData = Allplayers.filter((player) => player.position.toLowerCase() === position);
+    
     toggleVisibility(crud_modal)
-    idealeplayer(temData)
-    console.log("haris is", temData);
+    idealeplayer(temData,diva)
 }
 
 
-fetch('players.json')
+fetch('../../players.json')
   .then(response => response.json())
   .then(data => {
     localStorage.setItem('allplayers',JSON.stringify(data.players))
-    console.log(Allplayers);
     
 })
 .catch(error => console.error('Error fetching JSON:', error));
 
 Allplayers=JSON.parse(localStorage.getItem('allplayers'));
 getPlayers(); 
+
+function fuck(ana , howa)
+{
+  console.log('fuck',ana.id);
+  
+  howa.innerHTML = '';
+  howa.appendChild(ana)
+
+}

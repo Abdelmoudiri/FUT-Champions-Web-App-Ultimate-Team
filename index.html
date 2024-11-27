@@ -50,13 +50,13 @@
       <section class="m-4 grid grid-cols-5 max-h-screen min-h-screen grid-rows-5 bg-gray-300  p-4 bg-[url(./asset/img/pitch.svg)] rounded-md">
 
         <!-- GK -->
-        <div class="col-span-1 row-span-1 hover:shadow-orange-600 hover:shadow-sm  hover:cursor-pointer col-start-3 row-start-1">
-            <img src="./asset/img/add-player.png" alt="Goalkeeper" onclick="positionFliter('gk')">
+        <div onclick="positionFliter('gk',this)" class="col-span-1 row-span-1 hover:shadow-orange-600 hover:shadow-sm  hover:cursor-pointer col-start-3 row-start-1">
+            <img src="./asset/img/add-player.png" alt="Goalkeeper" >
         </div>
     
         <!-- RB -->
         <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-1 row-start-2">
-            <img src="./asset/img/add-player.png" alt="Defender 1" onclick="positionFliter('rb')">
+            <img src="./asset/img/add-player.png" alt="Defender 1" onclick="positionFliter('rb',this)">
         </div>
         <!-- CB -->
         <div class="col-span-1 row-span-1 hover:shadow-sm hover:cursor-pointer col-start-2 row-start-2">
@@ -104,6 +104,7 @@
     <footer class="bg-slate-500 p-4 text-center text-white">
       <p>&copy; 2024 Your Website. All rights reserved.</p>
     </footer>
-  </body>
   <script src="./asset/js/script.js"></script>
+
+  </body>
 </html>
