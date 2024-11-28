@@ -139,12 +139,13 @@
   </div>
 
   <!-- main -->
-  <main class="grid grid-cols-4 p-3">
+   
+  <main class="grid grid-cols-4 p-3" style="perspective: 1000px;">
 
     <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto">
     </section>
 
-    <section class=" grid grid-rows-4 max-h-screen min-h-screen col-span-2 bg-gray-300 bg-[url(./asset/img/pitch.svg)] rounded-md">
+    <section style="transform: rotateX(20deg)" class=" grid grid-rows-4 max-h-screen min-h-screen col-span-2 bg-gray-300 bg-[url(./asset/img/pitch.svg)] rounded-md">
       <!-- attaque -->
       <div class="flex justify-around ">
         <!-- LW -->
@@ -164,11 +165,11 @@
       <!-- milieu -->
       <div  class="flex justify-around ">
         <!-- CM -->
+        <div id="CML" onclick="positionFliter('CML', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+        </div>
         <div id="CM" onclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
-        <div id="CM1" onclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
-        </div>
-        <div id="CM2" onclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+        <div id="CMR" onclick="positionFliter('CMR', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         
       </div>
@@ -178,10 +179,10 @@
         <div id="LB" onclick="positionFliter('LB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         <!-- CB -->
-        <div id="CB" onclick="positionFliter('CB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+        <div id="CBL" onclick="positionFliter('CBL', this)" class=" hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         <!-- CB -->
-        <div id="CB1" onclick="positionFliter('CB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+        <div id="CBR" onclick="positionFliter('CBR', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         <!-- RB -->
         <div id="RB" onclick="positionFliter('RB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
@@ -195,8 +196,11 @@
 
     </section>
 
-    <section id="Bonne_touche" class=" flex gap-2 flex-wrap justify-center mt-3 h-screen overflow-auto">
+    <section  class="flex flex-col gap-4 items-center">
       <h1>Les Changements </h1>
+      <div id="Bonne_touche" class="flex flex-wrap gap-2 p-2  mt-3 overflow-auto">
+
+      </div>
     </section>
   </main>
 
