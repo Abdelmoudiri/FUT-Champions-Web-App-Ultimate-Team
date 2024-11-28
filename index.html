@@ -17,7 +17,7 @@
   </header>
 
   <!-- poopup de selection -->
-  <section id="crud-modal" class="border-g modal bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden">
+  <section id="crud-modal" class="bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden ">
     <button id="btnClose" class="absolute top-2 right-2 text-white font-bold text-xl" aria-label="Close modal">
       &times;
     </button>
@@ -25,7 +25,7 @@
     <div id="div_choisi_joueur" class="grid grid-cols-3 gap-3 mx-auto bg-slate-900 w-fit">
     </div>
     <div class="flex justify-center">
-      <button id="btnAjoute"
+      <button id="btnAjoute" 
         class="text-white mb-[2%] inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -39,7 +39,7 @@
 
   <!-- poopup -->
 
-  <div id="Div_add_player" class="border-g modal bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden">
+  <div id="Div_add_player" class="border-g modal bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50 mx-auto h-[50vh] w-[50%] hidden">
     <h1 class="text-xl font-bold text-center">Player Information</h1>
     <form id="playerForm" class="bg-gray-800 p-3  rounded-lg shadow-md w-[90%] h-[55vh] mx-auto">
       <h2 class="text-2xl font-bold ">Add New Player</h2>
@@ -59,7 +59,10 @@
             <option value="CM">CM</option>
             <option value="LW">LW</option>
             <option value="RW">RW</option>
+            <option value="RW">LB</option>
             <option value="CB">CB</option>
+            <option value="CB">CB1</option>
+            <option value="CB">RB</option>
             <option value="GK">GK</option>
           </select>
         </div>
@@ -96,35 +99,35 @@
       </div>
   
       <!-- Goalkeeper-Specific Stats -->
-      <div id="goalkeeperStats" class="grid grid-cols-2 gap-4 hidden mt-4">
+      <div id="goalkeeperStats" class="grid grid-cols-2 gap-x-2 hidden">
         <div>
-          <label for="diving" class="block mb-1 text-lg">DIV</label>
-          <input type="number" id="diving" name="diving" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+          <label for="diving" class="block  text-sm">DIV</label>
+          <input type="number" id="diving" name="diving" min=0 max=99 class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
         <div>
-          <label for="handling" class="block mb-1 text-lg">HAN</label>
-          <input type="number" id="handling" name="handling" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+          <label for="handling" class="block  text-sm">HAN</label>
+          <input type="number" id="handling" name="handling" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
         <div>
-          <label for="kicking" class="block mb-1 text-lg">KIC</label>
-          <input type="number" id="kicking" name="kicking" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+          <label for="kicking" class="block  text-sm">KIC</label>
+          <input type="number" id="kicking" name="kicking" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
         <div>
-          <label for="reflexes" class="block mb-1 text-lg">REF</label>
-          <input type="number" id="reflexes" name="reflexes" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+          <label for="reflexes" class="block  text-sm">REF</label>
+          <input type="number" id="reflexes" name="reflexes" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
         <div>
-          <label for="speed" class="block mb-1 text-lg">SPD</label>
-          <input type="number" id="speed" name="speed" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+          <label for="speed" class="block  text-sm">SPD</label>
+          <input type="number" id="speed" name="speed" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
         <div>
-          <label for="positioning" class="block mb-1 text-lg">POS</label>
-          <input type="number" id="positioning" name="positioning" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-300">
+          <label for="positioning" class="block  text-sm">POS</label>
+          <input type="number" id="positioning" name="positioning" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-300">
         </div>
         <!-- File input for Goalkeeper -->
         <div>
-          <label for="image" class="block mb-1 text-lg">Image</label>
-          <input type="file" name="image" id="image" class="w-full p-1 bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
+          <label for="image" class="block  text-sm">Image</label>
+          <input type="file" name="image" id="image" class="w-full  bg-gray-700 rounded-md text-white outline-none focus:ring-2 focus:ring-blue-100">
         </div>
       </div>
   
