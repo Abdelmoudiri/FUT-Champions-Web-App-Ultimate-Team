@@ -4,44 +4,28 @@ const crud_modal=document.getElementById("crud-modal");
 const Div_add_player=document.getElementById("Div_add_player");
 const btnClose=document.getElementById("btnClose");
 const btnAjouter=document.getElementById("btnAjoute");
-let l = document.getElementById("L");
 
-btnAjouter.addEventListener("click", function() {
-  toggleVisibility(crud_modal);
-  toggleVisibility(Div_add_player);
-});
-function addPlayerToDatabase(event) {
-  event.preventDefault(); 
 
-  const name = document.getElementById("name").value;
-  const position = document.getElementById("position").value;
-  const photo = document.getElementById("photo").value;
-  const pace = document.getElementById("pace").value;
-  const shooting = document.getElementById("shooting").value;
-  const passing = document.getElementById("passing").value;
-  const dribbling = document.getElementById("dribbling").value;
-  const defending = document.getElementById("defending").value;
-  const physical = document.getElementById("physical").value;
+const div_LW = document.getElementById("LW");
+const div_ST = document.getElementById("ST");
+const div_RW = document.getElementById("RW");
 
-  const newPlayer = {
-    name: name,
-    position: position,
-    photo: photo,
-    pace: pace,
-    shooting: shooting,
-    passing: passing,
-    dribbling: dribbling,
-    defending: defending,
-    physical: physical
-  };
-  Allplayers.push(newPlayer);
-  localStorage.setItem('allplayers',JSON.stringify(Allplayers))
+const div_CM = document.getElementById("CM");
+const div_CM1 = document.getElementById("CM-1");
+const div_CM2 = document.getElementById("CM-2");
 
-}
+const div_LB = document.getElementById("LB");
+const div_CB = document.getElementById("CB");
+const div_CB1 = document.getElementById("CB-1");
+const div_RB = document.getElementById("RB");
+
+const div_GK = document.getElementById("Gk");
+
+
 
 let Allplayers = [];
 let temData=[];
-let playeDiv; 
+let playerDiv; 
 
 function toggleVisibility(element) {
   if (element.classList.contains('hidden')) {
@@ -58,17 +42,16 @@ btnClose.addEventListener("click", function() {
 });
 
 
-function idealeplayer(element, diva) {
+function FiltrerAjouterPoopup(element, diva) {
   divChoisiJoueur.innerHTML = '';  
-  
   element.forEach(player => {
-    l.remove()
     playerDiv = document.createElement('div');
     playerDiv.setAttribute('draggable', 'true');
-    playerDiv.setAttribute('id', `player-${player.id}`);  
+    playerDiv.setAttribute('id', `${player.id}`);  
+    playerDiv.setAttribute('onclick',"funcAjouter_Terrain(this,this.id);");  
     playerDiv.className = "relative flex items-center justify-center";
     playerDiv.innerHTML = `
-      <div onclick="fonction1(this, ${diva})" class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+      <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
         <div class="relative flex text-[#e9cc74] px-[0.3rem]">
           <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
             <div class="text-[1rem] mt-5">${player.rating}</div>
@@ -129,9 +112,9 @@ function idealeplayer(element, diva) {
       </div>
     `;
     divChoisiJoueur.appendChild(playerDiv);
-    playerDiv.addEventListener("click", function() {
-      diva.appendChild(playerDiv);
-    });
+    // playerDiv.addEventListener("click", function() {
+    //   diva.appendChild(playerDiv);
+    // });
   });
 }
 function getPlayers() {
@@ -211,11 +194,9 @@ function getPlayers() {
 }
 
 function positionFliter(position,diva){
- 
-    temData = Allplayers.filter((player) => player.position.toLowerCase() === position);
-    
+    temData = Allplayers.filter((player) => player.position.toLowerCase() === position.toLowerCase());
     toggleVisibility(crud_modal)
-    idealeplayer(temData,diva)
+    FiltrerAjouterPoopup(temData,diva)
 }
 
 
@@ -232,11 +213,7 @@ fetch('../../players.json')
 Allplayers=JSON.parse(localStorage.getItem('allplayers'));
 getPlayers(); 
 
-function fonction1(ana , howa)
-{
-  console.log("work please",ana.id);
- howa.prepend(ana)
-}
+
 
 function toggle() {
   const position = document.getElementById('position').value;
@@ -251,3 +228,76 @@ function toggle() {
   goalkeeperStats.classList.add('hidden');
   }
   }
+document.getElementById('ajouterAlocalStorage').addEventListener('click', addPlayerToDatabase);
+
+  function addPlayerToDatabase(event) {
+    event.preventDefault(); 
+    
+    const name = document.getElementById("name").value;
+    const position = document.getElementById("position").value;
+    const photo = document.getElementById("photo").value;
+    const pace = document.getElementById("pace").value;
+    const shooting = document.getElementById("shooting").value;
+    const passing = document.getElementById("passing").value;
+    const dribbling = document.getElementById("dribbling").value;
+    const defending = document.getElementById("defending").value;
+    const physical = document.getElementById("physical").value;
+  
+    if (!name || !position || !photo || !pace || !shooting || !passing || !dribbling || !defending || !physical) {
+      alert("Please fill in all fields");
+      return;
+    }
+  
+    const newPlayer = {
+      id: Allplayers.length + 1, 
+      name: name,
+      position: position,
+      photo: photo,
+      pace: pace,
+      shooting: shooting,
+      passing: passing,
+      dribbling: dribbling,
+      defending: defending,
+      physical: physical
+    };
+  
+    Allplayers.push(newPlayer);
+  
+    localStorage.setItem('allplayers', JSON.stringify(Allplayers));
+  
+    document.getElementById("playerForm").reset();
+    
+    getPlayers(); 
+    toggleVisibility(Div_add_player);
+  }
+  
+
+  function funcAjouter_Terrain(divCard,id) {
+    Allplayers.forEach(player => {
+
+      if (player.id == id) {  
+        switch (player.position) {
+          case 'LW':
+              div_LW.appendChild(divCard);
+              break;
+          case 'ST':
+              div_ST.appendChild(divCard);
+              break;
+          case 'RW':
+              div_RW.appendChild(divCard);
+              break;
+          case 'CM':
+              div_CM.appendChild(divCard);
+              break;
+          case 'GK':
+              div_GK.appendChild(divCard);
+              break;
+          default:
+              console.log('Unknown position');
+              break;
+        }
+      }
+    });
+  }
+  
+  

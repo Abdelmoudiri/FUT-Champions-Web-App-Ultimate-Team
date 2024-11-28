@@ -39,7 +39,7 @@
 
   <!-- poopup -->
 
-  <div id="Div_add_player" class="hidden w-[30vw] mx-auto bg-gradient-to-br from-purple-800 via-blue-700 to-blue-500  h-[60vh] text-center rounded-xl shadow-xl  text-white  ">
+  <div id="Div_add_player" class="border-g modal bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden">
     <h1 class="text-xl font-bold text-center">Player Information</h1>
     <form id="playerForm" class="bg-gray-800 p-3  rounded-lg shadow-md w-[90%] h-[55vh] mx-auto">
       <h2 class="text-2xl font-bold ">Add New Player</h2>
@@ -129,7 +129,7 @@
       </div>
   
       <!-- Submit Button -->
-      <button type="submit" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-lg font-bold py-3 rounded-lg transition-all">
+      <button type="submit" id="ajouterAlocalStorage" onclick="addPlayerToDatabase()" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-lg font-bold py-3 rounded-lg transition-all">
       Ajouter le joueur
       </button>
     </form>
@@ -145,54 +145,49 @@
       <!-- attaque -->
       <div class="flex justify-around ">
         <!-- LW -->
-        <div id="LW" onclick="positionFliter('lw',this)" class="relative hover:shadow-sm hover:cursor-pointer ">
-          <img id="L" src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="LW" onclick="positionFliter('LW', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
+        
         <!-- ST -->
-        <div id="ST" onclick="positionFliter('st',this)" class="hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+       
+        <div id="ST" onclick="positionFliter('ST', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
+        
         <!-- RW -->
-        <div id="RW" onclick="positionFliter('rw',this)" class=" hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="RW" onclick="positionFliter('RW', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
       </div>
 
       <!-- milieu -->
       <div  class="flex justify-around ">
         <!-- CM -->
-        <div id="CM" onclick="positionFliter('cm',this)" class=" hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="CM" onclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
-        <div id="CM-1"onclick="positionFliter('cm',this)" class="hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="CM1" onclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
-        <div id="CM-2"onclick="positionFliter('cm',this)" class=" hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="CM2" onclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
+        
       </div>
       <!-- diffence -->
       <div  class="flex justify-around ">
         <!-- LB -->
-        <div id="LB" onclick="positionFliter('lb',this)" class=" hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="LB" onclick="positionFliter('LB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         <!-- CB -->
-        <div id="CB" onclick="positionFliter('cb',this)" class="hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="CB" onclick="positionFliter('CB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         <!-- CB -->
-        <div id="CB-1" onclick="positionFliter('cb',this)" class=" hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="CB1" onclick="positionFliter('CB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
         <!-- RB -->
-        <div id="RB" onclick="positionFliter('rb',this)" class=" hover:shadow-sm hover:cursor-pointer ">
-          <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+        <div id="RB" onclick="positionFliter('RB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
         </div>
       </div>
       <!-- goal keeper -->
-      <div id="Gk" onclick="positionFliter('gk',this)" class="flex justify-center hover:shadow-sm hover:cursor-pointer ">
-        <img src='https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png' alt="Goalkeeper position" class="hover:opacity-75 w-[100px] h-[180px]">
+      <div class="flex justify-center">
+        <div id="GK" onclick="positionFliter('GK', this)" class="hover:opacity-75 w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+        </div>
       </div>
 
     </section>
