@@ -1,7 +1,7 @@
 const showAllplzyerSection=document.getElementById("allplayerSection");
 const divChoisiJoueur=document.getElementById("div_choisi_joueur");
 const crud_modal=document.getElementById("crud-modal");
-const Div_add_player=document.getElementById("Div_add_player");
+const modal_add_player=document.getElementById("Div_add_player");
 const btnClose=document.getElementById("btnClose");
 const btnAjouter=document.getElementById("btnAjoute");
 
@@ -21,15 +21,29 @@ const div_RB = document.getElementById("RB");
 
 const div_GK = document.getElementById("Gk");
 
+const playerName = document.getElementById("name")
+const playerImage = document.getElementById("image")
+const playerPostion = document.getElementById("position")
+const playerNationality = document.getElementById("nationality")
+const playerClub = document.getElementById("club")
+const playerRating = document.getElementById("rating")
+const playerPace = document.getElementById("pace")
+const playerDriblling = document.getElementById("dribbling")
+const playerDefending = document.getElementById("defending")
+const playerPassing = document.getElementById("passing")
+const playerShooting = document.getElementById("shooting")
+const playerPhysical = document.getElementById("physical")
+
 
 
 let Allplayers = [];
 let temData=[];
 let playerDiv; 
 
+
 btnAjouter.addEventListener("click",()=>{
   toggleVisibility(crud_modal);
-  toggleVisibility(Div_add_player);
+  toggleVisibility(modal_add_player);
 })
 
 function toggleVisibility(element) {
@@ -47,16 +61,19 @@ btnClose.addEventListener("click", function() {
 });
 
 
-function FiltrerAjouterPoopup(element, diva) {
+function FiltrerAjouterPoopup(element) {
   divChoisiJoueur.innerHTML = '';  
   element.forEach(player => {
     playerDiv = document.createElement('div');
     playerDiv.setAttribute('draggable', 'true');
     playerDiv.setAttribute('id', `${player.id}`);  
-    playerDiv.setAttribute('onclick',"funcAjouter_Terrain(this,this.id);");  
-    playerDiv.setAttribute('ondoubleclick',"onclick='this.parentElement.remove()';");  
-    playerDiv.className = "relative flex  items-center justify-center";
+    playerDiv.setAttribute('ondblclick',"funcAjouter_Terrain(this,this.id);");  
+    playerDiv.className = "relative  text-white rounded-lg";
     playerDiv.innerHTML = `
+          <div class="absolute top-0 right-0 z-10 w-full flex justify-around">
+           <button onclick="suprimerJoueur(this.parentElement.parentElement)"><i class="fa fa-trash w-[30px] h-[30px] text-red-600"></i></button>
+           <button onclick="modifierJoueur(this.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
+          </div>
       <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
         <div class="relative flex text-[#e9cc74] px-[0.3rem]">
           <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
@@ -118,9 +135,7 @@ function FiltrerAjouterPoopup(element, diva) {
       </div>
     `;
     divChoisiJoueur.appendChild(playerDiv);
-    // playerDiv.addEventListener("click", function() {
-    //   diva.appendChild(playerDiv);
-    // });
+    
   });
 }
 function getPlayers() {
@@ -133,6 +148,10 @@ function getPlayers() {
       playerDiv.className = "relative flex items-center justify-center bg-gray-800 text-white rounded-lg ";
 
       playerDiv.innerHTML = `
+          <div class="absolute top-0 right-0 z-10 w-full flex justify-around">
+          <button onclick="suprimerJoueur(this.parentElement.parentElement)"><i class="fa fa-trash w-[30px] h-[30px] text-red-600"></i></button>
+           <button onclick="modifierJoueur(this.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
+          </div>
           <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
               <div class="relative flex text-[#e9cc74] px-[0.3rem]">
                   <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
@@ -202,7 +221,8 @@ function getPlayers() {
 function positionFliter(position,diva){
     temData = Allplayers.filter((player) => player.position.toLowerCase() === position.toLowerCase());
     toggleVisibility(crud_modal)
-    FiltrerAjouterPoopup(temData,diva)
+  
+    FiltrerAjouterPoopup(temData)
 }
 
 
@@ -234,11 +254,10 @@ function toggle() {
   goalkeeperStats.classList.add('hidden');
   }
   }
-document.getElementById('ajouterAlocalStorage').addEventListener('click', addPlayerToDatabase);
+// document.getElementById('ajouterAlocalStorage').addEventListener('click', addPlayerToDatabase);
 
   function addPlayerToDatabase(event) {
     event.preventDefault(); 
-    
     const name = document.getElementById("name").value;
     const position = document.getElementById("position").value;
     const photo = document.getElementById("photo").value;
@@ -271,21 +290,36 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
   
     localStorage.setItem('allplayers', JSON.stringify(Allplayers));
   
-    document.getElementById("playerForm").reset();
+    // document.getElementById("playerForm").reset();
     
     getPlayers(); 
     toggleVisibility(Div_add_player);
   }
   
+  const cards = document.querySelectorAll(".player-card"); 
+  cards.forEach(card => {
+    card.addEventListener("dblclick", function () {
+      const index = Allplayers.findIndex(player => player.id === playerId);
+  if (index !== -1) {
+    Allplayers.splice(index, 1);
+    card.remove();
+    }
+  }); 
+});
 
   function funcAjouter_Terrain(divCard,id) {
+    var I = Allplayers.findIndex((player) => player.id == id);
+    
+    console.log("players",Allplayers)
     Allplayers.forEach(player => {
-
+      console.log("index",typeof(player.id),typeof(id))
       if (player.id == id) {  
         switch (player.position) {
           case 'LW':
               if (div_LW.innerHTML.trim() === '') {
-                div_LW.appendChild(divCard);
+                div_LW.innerHTML=divCard.innerHTML 
+                divCard.remove()
+                Allplayers.splice(I,1)
               } else {
                 AjouterAu_Changement(divCard)
               }
@@ -297,12 +331,16 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
                   div_ST.appendChild(divCard);
                 } else {
                   AjouterAu_Changement(divCard)
+                Allplayers.splice(I,1)
+
                 }   
                 break;
 
           case 'RW':
             if (div_RW.innerHTML.trim() === '') {
               div_RW.appendChild(divCard);
+              Allplayers.splice(I,1)
+
             } else {
               AjouterAu_Changement(divCard)
           }
@@ -310,6 +348,8 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
           case 'CM':
             if (div_CM.innerHTML.trim() === '') {
               div_CM.appendChild(divCard);
+              Allplayers.splice(I,1)
+
             } else {
               AjouterAu_Changement(divCard)
             }
@@ -317,13 +357,16 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
           case 'CML':
             if (div_CML.innerHTML.trim() === '') {
               div_CML.appendChild(divCard);
+              Allplayers.splice(I,1)
+
             } else {
               AjouterAu_Changement(divCard)
             }
               break;
           case 'CMR':
             if (div_CMR.innerHTML.trim() === '') {
-              div_CMR.appendChild(divCard);
+                Allplayers.splice(I,1)
+                div_CMR.appendChild(divCard);
             } else {
               AjouterAu_Changement(divCard)
             }
@@ -331,21 +374,18 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
           case 'LB':
             if (div_LB.innerHTML.trim() === '') {
               div_LB.appendChild(divCard);
+              Allplayers.splice(I,1)
+
             } else {
               AjouterAu_Changement(divCard)
           }
               break;
-          case 'CB':
-            if (div_CB.innerHTML.trim() === '') {
-              div_CB.appendChild(divCard);
-            } else {
-              AjouterAu_Changement(divCard)
-          }
-              
-              break;
+          
           case 'CBL':
             if (div_CBL.innerHTML.trim() === '') {
               div_CBL.appendChild(divCard);
+              Allplayers.splice(I,1)
+
             } else {
               AjouterAu_Changement(divCard)
           }
@@ -354,6 +394,8 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
           case 'CBR':
                   if (div_CBR.innerHTML.trim() === '') {
                     div_CBR.appendChild(divCard);
+                Allplayers.splice(I,1)
+
                   } else {
                     AjouterAu_Changement(divCard)
                   }
@@ -361,13 +403,18 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
           case 'RB':
                 if (div_RB.innerHTML.trim() === '') {
                 div_RB.appendChild(divCard);
+                Allplayers.splice(I,1)
+
                 }else {
                   AjouterAu_Changement(divCard)
                 }
                 break;
           case 'GK':
             if (div_GK.innerHTML.trim() === '') {
+              alert("jjjj")
               div_GK.appendChild(divCard);
+              Allplayers.splice(I,1)
+
             } else {
               AjouterAu_Changement(divCard)
             }
@@ -382,9 +429,65 @@ document.getElementById('ajouterAlocalStorage').addEventListener('click', addPla
   
   function AjouterAu_Changement(joueur)
   {
-    
-    document.getElementById('Bonne_touche').appendChild(joueur);
-    
+    document.getElementById('Bonne_touche').appendChild(joueur); 
+  }
+
+
+  function modifierJoueur(element)
+  {
+    alert('Modifier',element);
+    toggleVisibility()
+  }
+  function suprimerJoueur(element)
+  {
+    alert('suprimer',element);
+    element.remove()
+    var I = Allplayers.findIndex((player) => player.id == element.id);
+    Allplayers.splice(I,1)
   }
 
   
+  let validateForm = () => {
+    if (playerName.value === "" || playerName.value.length > 20) {
+      showErrorMessage(playerName, "Enter a valid name");
+    } else if (playerImage.value === "") {
+      showErrorMessage(playerImage, "you have to enter a valid url");
+    } else if (playerPostion.value === "none") {
+      showErrorMessage(playerPostion, "you have to choose a valid position");
+    } else if (playerNationality.value === "") {
+      showErrorMessage(playerNationality, "you have to enter a valid url");
+    } else if (playerClub.value === "") {
+      showErrorMessage(playerClub, "enter a valid logo url");
+    } else if (playerRating.value === "" || playerRating.value <= 0) {
+      showErrorMessage(playerRating, "invalid rating number");
+    } else if (playerPace.value === "" || playerPace.value <= 0) {
+      showErrorMessage(playerPace, "invalid pace number");
+    } else if (playerShooting.value === "" ||  playerShooting.value <= 0) {
+      showErrorMessage(playerShooting, "invalid shooting number");
+    } else if (playerPassing.value === "" ||  playerPassing.value <= 0) {
+      showErrorMessage(playerPassing, "invalid passing number");
+    } else if (playerDriblling.value === "" ||  playerDriblling.value <= 0) {
+      showErrorMessage(playerDriblling, "invalid dribling number");
+    } else if (playerDefending.value === "" ||  playerDefending.value <= 0) {
+      showErrorMessage(playerDefending, "invalid defendig number");
+    } else if (playerPhysical.value === "" ||  playerPhysical.value <= 0) {
+      showErrorMessage(playerPhysical, "invalid physical number");
+    } else {
+      addPlayerForm.reset();
+    }
+  };
+  function showErrorMessage(element, message) {
+    const inputControl = element.parentElement;
+    const displayError = inputControl.querySelector(".error-message");
+    displayError.innerHTML = message;
+  }
+  document.getElementById("add-player-btn").addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log("fzepn");
+    validateForm();
+    
+  });
+  
+  document.getElementById('close-btn-modal').addEventListener("click", function(e) {
+    toggleVisibility(modal_add_player);
+  });
