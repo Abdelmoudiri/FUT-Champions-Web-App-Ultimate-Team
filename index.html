@@ -19,7 +19,7 @@
     <img src="./asset/img/team.png" class="w-[5%] h-[2%] mx-auto" alt="logo de mon site" />
   </header>
 
-  <!-- poopup de selection -->
+  <!-- poopup de filtrer le joueur -->
   <section id="crud-modal" class="bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden ">
     <button id="btnClose" class="absolute top-2 right-2 text-white font-bold text-xl" aria-label="Close modal">
       &times;
@@ -40,108 +40,108 @@
     </div>
   </section>
 
-  <!-- poopup -->
+  <!-- poopup pour ajouter noveu joeur -->
+  <section
+  class="hidden flex text-white flex-col px-4 py-5 bg-slate-600 rounded-md shadow-md fixed w-[90%] md:max-w-[500px] md:min-w-[300px] top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-10"
+  id="add-player-modal">
+  <button type="button" id="btn_close_modal"><img src="./asset/img/close.png" alt="close"
+          class="w-[30px] h-[30px] absolute right-4 top-2 "></button>
+  <h2 class="text-lg mx-auto font-bold text-white mb-3">Add Player</h2>
+  <form action="" class="flex flex-col" id="add-player-form">
+      <div class="grid grid-cols-2 gap-2">
+          <div class="flex flex-col gap">
+              <input id="f-name"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="text" placeholder="Player name">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col">
+              <input id="f-image"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="url" placeholder="Player image url">
 
-  <section  class="hidden flex text-white flex-col px-4 py-5 bg-slate-600 rounded-md shadow-md fixed w-[90%] md:max-w-[500px] md:min-w-[300px] top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-10" id="Div_add_player">
-        <button type="button" id="close-btn-modal"><img src="./asset/img/close.png" alt="close"
-                class="w-[30px] h-[30px] absolute right-4 top-2 "></button>
-        <h2 class="text-lg mx-auto font-bold text-white mb-3">Add Player</h2>
-        <form action="" class="flex flex-col" id="add-player-form">
-            <div class="grid grid-cols-2 gap-2">
-                <div class="flex flex-col gap">
-                    <input id="name"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="text" placeholder="Player name">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col">
-                    <input id="image"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="url" placeholder="Player image url">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col">
+              <select
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2 text-gray-400 cursor-pointer"
+                  name="f-position" id="f-position" onchange="adapteForm()">
+                  <option value="none">player position</option>
+                  <option value="gk">GK</option>
+                  <option value="cb">CB</option>
+                  <option value="lb">LB</option>
+                  <option value="cb">CB</option>
+                  <option value="cm">CM</option>
+                  <option value="rw">RW</option>
+                  <option value="st">ST</option>
+                  <option value="lw">LW</option>
+              </select>
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-nationality"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="url" placeholder="Player nationality flag">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-club"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="url" placeholder="Player club logo url">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-rating"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="number" placeholder="rating" min="40" max="99">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-pace"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="number" placeholder="pace" min="40" max="99">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-shooting"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="number" placeholder="shooting">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-passing"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="number" placeholder="passing">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-driblling"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="number" placeholder="driblling">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col gap">
+              <input id="f-defending"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                  type="number" placeholder="defending">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+          <div class="flex flex-col">
+              <input id="f-physical"
+                  class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px]"
+                  type="number" placeholder="physical">
+              <div class="error-message text-red-600 text-sm font-semibold"></div>
+          </div>
+      </div>
+      <button class="text-white bg-[#5ce1e6] px-2 py-1 rounded-md mt-2 focus:outline-none focus:border-none"
+          id="add-player-btn" type="submit">Add Player</button>
 
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col">
-                    <select
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2 text-gray-400 cursor-pointer"
-                        name="f-position" id="position" onchange="adapteForm()">
-                        <option value="none">player position</option>
-                        <option value="gk">GK</option>
-                        <option value="cb">CB</option>
-                        <option value="lb">LB</option>
-                        <option value="cb">CB</option>
-                        <option value="cm">CM</option>
-                        <option value="rw">RW</option>
-                        <option value="st">ST</option>
-                        <option value="lw">LW</option>
-                    </select>
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="nationality"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="url" placeholder="Player nationality flag">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="club"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="url" placeholder="Player club logo url">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="rating"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="rating" min="40" max="99">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="pace"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="pace" min="40" max="99">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="shooting"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="shooting">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="passing"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="passing">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="dribbling"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="dribbling">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col gap">
-                    <input id="defending"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="defending">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-                <div class="flex flex-col">
-                    <input id="physical"
-                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px]"
-                        type="number" placeholder="physical">
-                    <div class="error-message text-red-600 text-sm font-semibold"></div>
-                </div>
-            </div>
-            <button class="text-white bg-[#5ce1e6] px-2 py-1 rounded-md mt-2 focus:outline-none focus:border-none"
-                id="add-player-btn" type="submit">Add Player</button>
+  </form>
 
-        </form>
-
-    </section>
+</section>
 
   <!-- main -->
-   
-  <main class="grid   grid-cols-1 md:grid-cols-1 lg:grid-cols-4  p-3" style="perspective: 1000px;">
+   <main class="grid   grid-cols-1 md:grid-cols-1 lg:grid-cols-4  p-3" style="perspective: 1000px;">
 
         <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center sm:w-screen md:w-screen lg:w-full  h-screen overflow-auto">
         </section>

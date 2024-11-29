@@ -1,7 +1,7 @@
 const showAllplzyerSection=document.getElementById("allplayerSection");
 const divChoisiJoueur=document.getElementById("div_choisi_joueur");
 const crud_modal=document.getElementById("crud-modal");
-const modal_add_player=document.getElementById("Div_add_player");
+const modal_add_player=document.getElementById("add-player-modal");
 const btnClose=document.getElementById("btnClose");
 const btnAjouter=document.getElementById("btnAjoute");
 
@@ -21,18 +21,18 @@ const div_RB = document.getElementById("RB");
 
 const div_GK = document.getElementById("Gk");
 
-const playerName = document.getElementById("name")
-const playerImage = document.getElementById("image")
-const playerPostion = document.getElementById("position")
-const playerNationality = document.getElementById("nationality")
-const playerClub = document.getElementById("club")
-const playerRating = document.getElementById("rating")
-const playerPace = document.getElementById("pace")
-const playerDriblling = document.getElementById("dribbling")
-const playerDefending = document.getElementById("defending")
-const playerPassing = document.getElementById("passing")
-const playerShooting = document.getElementById("shooting")
-const playerPhysical = document.getElementById("physical")
+let playerName = document.getElementById("f-name");
+let playerImage = document.getElementById("f-image");
+let playerPosition = document.getElementById("f-position");
+let playerNationality = document.getElementById("f-nationality");
+let playerClub = document.getElementById("f-club");
+let playerRating = document.getElementById("f-rating");
+let playerPace = document.getElementById("f-pace");
+let playerShooting = document.getElementById("f-shooting");
+let playerPassing = document.getElementById("f-passing");
+let playerDriblling = document.getElementById("f-driblling");
+let playerDefending = document.getElementById("f-defending");
+let playerPhysical = document.getElementById("f-physical");
 
 
 
@@ -58,6 +58,10 @@ function toggleVisibility(element) {
 
 btnClose.addEventListener("click", function() {
   toggleVisibility(crud_modal);
+});
+
+document.getElementById("btn_close_modal").addEventListener("click", function() {
+  toggleVisibility(modal_add_player);
 });
 
 
@@ -446,14 +450,13 @@ function toggle() {
     Allplayers.splice(I,1)
   }
 
-  
   let validateForm = () => {
     if (playerName.value === "" || playerName.value.length > 20) {
       showErrorMessage(playerName, "Enter a valid name");
     } else if (playerImage.value === "") {
       showErrorMessage(playerImage, "you have to enter a valid url");
-    } else if (playerPostion.value === "none") {
-      showErrorMessage(playerPostion, "you have to choose a valid position");
+    } else if (playerPosition.value === "none") {
+      showErrorMessage(playerPosition, "you have to choose a valid position");
     } else if (playerNationality.value === "") {
       showErrorMessage(playerNationality, "you have to enter a valid url");
     } else if (playerClub.value === "") {
@@ -462,20 +465,22 @@ function toggle() {
       showErrorMessage(playerRating, "invalid rating number");
     } else if (playerPace.value === "" || playerPace.value <= 0) {
       showErrorMessage(playerPace, "invalid pace number");
-    } else if (playerShooting.value === "" ||  playerShooting.value <= 0) {
+    } else if (playerShooting.value === "" || playerShooting.value <= 0) {
       showErrorMessage(playerShooting, "invalid shooting number");
-    } else if (playerPassing.value === "" ||  playerPassing.value <= 0) {
+    } else if (playerPassing.value === "" || playerPassing.value <= 0) {
       showErrorMessage(playerPassing, "invalid passing number");
-    } else if (playerDriblling.value === "" ||  playerDriblling.value <= 0) {
+    } else if (playerDriblling.value === "" || playerDriblling.value <= 0) {
       showErrorMessage(playerDriblling, "invalid dribling number");
-    } else if (playerDefending.value === "" ||  playerDefending.value <= 0) {
+    } else if (playerDefending.value === "" || playerDefending.value <= 0) {
       showErrorMessage(playerDefending, "invalid defendig number");
-    } else if (playerPhysical.value === "" ||  playerPhysical.value <= 0) {
+    } else if (playerPhysical.value === "" || playerPhysical.value <= 0) {
       showErrorMessage(playerPhysical, "invalid physical number");
     } else {
       addPlayerForm.reset();
+      hideModal();
     }
   };
+
   function showErrorMessage(element, message) {
     const inputControl = element.parentElement;
     const displayError = inputControl.querySelector(".error-message");
@@ -485,7 +490,6 @@ function toggle() {
     e.preventDefault();
     console.log("fzepn");
     validateForm();
-    
   });
   
   document.getElementById('close-btn-modal').addEventListener("click", function(e) {
