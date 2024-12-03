@@ -67,7 +67,8 @@ const divChoisiJoueur=document.getElementById("div_choisi_joueur");
 const crud_modal=document.getElementById("crud-modal");
 const modal_add_player=document.getElementById("add-player-modal");
 const btnClose=document.getElementById("btnClose");
-const btnAjouter=document.getElementById("btnAjoute");
+const afficherModal=document.getElementById("afficher-modal");
+const bonneTouche=document.getElementById('Bonne_touche')
 
 
 const div_LW = document.getElementById("LW");
@@ -99,17 +100,19 @@ let playerDriblling = document.getElementById("f-dribbling");
 let playerDefending = document.getElementById("f-defending");
 let playerPhysical = document.getElementById("f-physical");
 
-const addPlayerForm=document.getElementById("add-player-form")
-
+const Form = document.getElementById("form")
+const ajouterJoueurButton =  document.getElementById("ajouter-joueur-btn")
 
 
 let Allplayers = [];
 let temData=[];
+let changement = [];
+let terainPlayers = [];
+
 let playerDiv; 
 
 
-btnAjouter.addEventListener("click",()=>{
-  toggleVisibility(crud_modal);
+afficherModal.addEventListener("click",()=>{
   toggleVisibility(modal_add_player);
 })
 
@@ -125,12 +128,62 @@ function toggleVisibility(element) {
 
 btnClose.addEventListener("click", function() {
   toggleVisibility(crud_modal);
+  
 });
 
 document.getElementById("close-btn").addEventListener("click", function() {
   toggleVisibility(modal_add_player);
 });
 
+Form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  validateForm_Ajout()
+})
+function showErrorMessage(element, message) {
+  const inputControl = element.parentElement;
+  const displayError = inputControl.querySelector(".error-message");
+  displayError.innerHTML = message;
+}
+///valider la forme de l'ajouter
+function validateForm_Ajout(){
+
+  if (playerName.value === "" || playerName.value.length > 20) {
+    showErrorMessage(playerName, "Enter a valid name");
+  } else if (playerImage.value === "") {
+    showErrorMessage(playerImage, "you have to enter a valid url");
+  } else if (playerPosition.value === "none") {
+    showErrorMessage(playerPosition, "you have to choose a valid position");
+  } else if (playerNationality.value === "") {
+    showErrorMessage(playerNationality, "you have to enter a valid nationality");
+  } else if (playerClub.value === "") {
+  } else if (playerCountryFlag.value === "") {
+    showErrorMessage(playerNationality, "you have to enter a valid url");
+  } else if (playerClub.value === "") {
+    showErrorMessage(playerClub, "enter a valid logo url");
+  } else if (playerRating.value === "" || playerRating.value <= 0) {
+    showErrorMessage(playerRating, "invalid rating number");
+  } else if (playerPace.value === "" || playerPace.value <= 0) {
+    showErrorMessage(playerPace, "invalid pace number");
+  } else if (playerShooting.value === "" || playerShooting.value <= 0) {
+    showErrorMessage(playerShooting, "invalid shooting number");
+  } else if (playerPassing.value === "" || playerPassing.value <= 0) {
+    showErrorMessage(playerPassing, "invalid passing number");
+  } else if (playerDriblling.value === "" || playerDriblling.value <= 0) {
+    showErrorMessage(playerDriblling, "invalid dribling number");
+  } else if (playerDefending.value === "" || playerDefending.value <= 0) {
+    showErrorMessage(playerDefending, "invalid defendig number");
+  } else if (playerPhysical.value === "" || playerPhysical.value <= 0) {
+    showErrorMessage(playerPhysical, "invalid physical number");
+  } else {
+
+    alert("Ajouter Avec successfully")
+    toggleVisibility(modal_add_player);
+    addNewPlayer();
+    getPlayers()
+    Form.reset();
+    
+  }
+};
 //////////////////////////////////////////////////////////////////////// afficher les filters dans popup
 function FiltrerAjouterPoopup(element) {
   divChoisiJoueur.innerHTML = '';  
@@ -286,8 +339,7 @@ function FiltrerAjouterPoopup(element) {
 }
 function getPlayers() {
   showAllplzyerSection.innerHTML = '';
-
-  Allplayers.forEach(player => {
+  JSON.parse(localStorage.getItem('allplayers')).forEach(player => {
       let playerDiv = document.createElement('div');
       playerDiv.setAttribute('draggable', 'true');
       playerDiv.setAttribute('id', `${player.id}`); 
@@ -299,7 +351,7 @@ function getPlayers() {
           <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
           <div class="absolute top-0 right-0 z-10 w-full flex justify-around">
          <button onclick="suprimerJoueur(this.parentElement.parentElement.parentElement)"><i class="fa fa-trash w-[30px] h-[30px] text-red-600"></i></button>
-         <button onclick="modifierJoueur(this.parentElement.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
+       <button onclick="editPlayer(this.parentElement.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
         </div>
               <div class="relative flex text-[#e9cc74] px-[0.3rem]">
                   <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
@@ -368,7 +420,7 @@ function getPlayers() {
         <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
         <div class="absolute top-0 right-0 z-10 w-full flex justify-around">
          <button onclick="suprimerJoueur(this.parentElement.parentElement.parentElement)"><i class="fa fa-trash w-[30px] h-[30px] text-red-600"></i></button>
-         <button onclick="modifierJoueur(this.parentElement.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
+       <button onclick="editPlayer(this.parentElement.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
         </div>
             <div class="relative flex text-[#e9cc74] px-[0.3rem]">
                 <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
@@ -439,7 +491,7 @@ function getPlayers() {
 }
 
 
-// //////////////////////////filtrer les joueur
+//////////////////////////////////////////////////////////////////////////filtrer les joueur
 function positionFliter(position,diva){
     temData = Allplayers.filter((player) => player.position.toLowerCase() === position.toLowerCase());
     toggleVisibility(crud_modal)
@@ -447,17 +499,10 @@ function positionFliter(position,diva){
     FiltrerAjouterPoopup(temData)
 }
 
-////////////////////////////////
-
-
-
-////////////////////////////////
-
-
+////////////////////////////////////////////////////////////////////////////// Get all players
 fetch('../../players.json')
   .then(response => response.json())
   .then(data => {
-    // console.log(data.players);
  if(!localStorage.getItem("allplayers"))
  {
       localStorage.setItem('allplayers',JSON.stringify(data.players))
@@ -465,122 +510,111 @@ fetch('../../players.json')
 })
 .catch(error => console.error('Error fetching JSON:', error));
 
-////afficher tous les joueurs
 setTimeout(function() {
   console.log(Allplayers);
   Allplayers = JSON.parse(localStorage.getItem('allplayers'));
   getPlayers(); 
 }, 75); 
 
-let changement = [];
 if(!localStorage.getItem("changement")){
   localStorage.setItem("changement",JSON.stringify(changement));
 }
 
-let terainPlayers = [];
 if(!localStorage.getItem("terainPlayers")){
   localStorage.setItem("terainPlayers",JSON.stringify(changement));
 }
 
+//////////////////////////////////////////////////////////////////////////////////////Remplacer joueur
+let ischanged=flase;
 
 function remplacerJoueur(element) {
 
-console.log("carad id :", element.id)
 let player=changement.filter(p => p.position == element.id)
-let p = player.filter(p => p.id == player.id)
-element.innerHTML = `
-         
-      <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
-      <div class="absolute top-0 right-0 z-10 w-full flex justify-around">
-       <button onclick="suprimerJoueur(this.parentElement.parentElement.parentElement)"><i class="fa fa-trash w-[30px] h-[30px] text-red-600"></i></button>
-       <button onclick="remplacerJoueur(this.parentElement.parentElement.parentElement)"><i class="fa-sharp fa-solid fa-arrow-right-arrow-left fa-bounce" style="color: #FFD43B;"></i></button>
-       <button onclick="editPlayer(this.parentElement.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
-      </div>
-        <div class="relative flex text-[#e9cc74] px-[0.3rem]">
-          <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
-            <div class="text-[1rem] mt-5">${player[0].rating}</div>
-            <div>${player[0].position}</div>
-            <div class="block">
-              <img src="${player[0].flag}" alt="${player[0].nationality}" class="w-[1rem] h-[14px] object-contain" />
-            </div>
-            <div class="block">
-              <img src="${player[0].logo}" alt="${player[0].club}" class="w-[1rem] h-[14px] object-contain" />
-            </div>
-          </div>
-          <div class="w-[70px] h-[80px] mx-auto overflow-hidden">
-            <img src="${player[0].photo}" alt="${player[0].name}" class="w-full h-full object-contain relative right-[-1rem] bottom-0" />
-          </div>
-        </div>
+let playerin=terainPlayers.filter(p => p.position == element.id)
 
-        <div class="w-full flex justify-around text-[#88e635] text-[0.7rem] font-bold uppercase">
-          <span class="ml-[0.4rem] text-shadow-lg">${player[0].position}</span>
-        </div>
+console.log("plyer from changment: " , player[0]);
 
-        <div class="relative">
-          <div class="text-[#e9cc74] w-[90%] mx-auto">
-            <div class="text-center w-[100%] text-[0.6rem] uppercase border-b-2 border-[#e9cc74]/[0.1] ">
-              <span class="block text-shadow-lg">${player[0].name}</span>
-            </div>
-            <div class="flex justify-center ">
-              <div class="pr-[1.5rem] border-r-2 border-[#e9cc74]/[0.1]">
-                <div class="flex items-center text-[0.5rem] uppercase">
-                  <span class="font-bold mr-[0.3rem]">${player[0].pace}</span>
-                  <span class="font-light">PAC</span>
-                </div>
-                <div class="flex items-center text-[0.5rem] uppercase">
-                  <span class="font-bold mr-[0.3rem]">${player[0].shooting}</span>
-                  <span class="font-light">SHO</span>
-                </div>
-                <div class="flex items-center text-[0.5rem] uppercase">
-                  <span class="font-bold mr-[0.3rem]">${player[0].passing}</span>
-                  <span class="font-light">PAS</span>
-                </div>
+console.log("player from terrain  :", playerin[0] )
+
+
+  bonneTouche.children[0].remove()
+
+  bonneTouche.innerHTML=element.innerHTML; 
+  element.innerHTML += `
+        <div class="relative w-[100px] h-[180px] bg-cover bg-center bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+        <div class="absolute top-0 right-0 z-10 w-full flex justify-around">
+         <button onclick="suprimerJoueur(this.parentElement.parentElement.parentElement)"><i class="fa fa-trash w-[30px] h-[30px] text-red-600"></i></button>
+         <button onclick="remplacerJoueur(this.parentElement.parentElement.parentElement)"><i class="fa-sharp fa-solid fa-arrow-right-arrow-left fa-bounce" style="color: #FFD43B;"></i></button>
+         <button onclick="editPlayer(this.parentElement.parentElement.parentElement)"><i class="fa fa-edit w-[30px] h-[30px] text-green-700"></i></button>
+        </div>
+          <div class="relative flex text-[#e9cc74] px-[0.3rem]">
+            <div class="absolute py-[0.8rem_0] text-xs uppercase font-light">
+              <div class="text-[1rem] mt-5">${player[0].rating}</div>
+              <div>${player[0].position}</div>
+              <div class="block">
+                <img src="${player[0].flag}" alt="${player[0].nationality}" class="w-[1rem] h-[14px] object-contain" />
               </div>
-              <div>
-                <div class="flex items-center text-[0.5rem] uppercase">
-                  <span class="font-bold mr-[0.3rem]">${player[0].dribbling}</span>
-                  <span class="font-light">DRI</span>
-                </div>
-                <div class="flex items-center text-[0.5rem] uppercase">
-                  <span class="font-bold mr-[0.3rem]">${player[0].defending}</span>
-                  <span class="font-light">DEF</span>
-                </div>
-                <div class="flex items-center text-[0.5rem] uppercase">
-                  <span class="font-bold mr-[0.3rem]">${player[0].physical}</span>
-                  <span class="font-light">PHY</span>
-                </div>
+              <div class="block">
+                <img src="${player[0].logo}" alt="${player[0].club}" class="w-[1rem] h-[14px] object-contain" />
               </div>
             </div>
+            <div class="w-[70px] h-[80px] mx-auto overflow-hidden">
+              <img src="${player[0].photo}" alt="${player[0].name}" class="w-full h-full object-contain relative right-[-1rem] bottom-0" />
+            </div>
+          </div>
+  
+          <div class="w-full flex justify-around text-[#88e635] text-[0.7rem] font-bold uppercase">
+            <span class="ml-[0.4rem] text-shadow-lg">${player[0].position}</span>
+          </div>
+  
+          <div class="relative">
+            <div class="text-[#e9cc74] w-[90%] mx-auto">
+              <div class="text-center w-[100%] text-[0.6rem] uppercase border-b-2 border-[#e9cc74]/[0.1] ">
+                <span class="block text-shadow-lg">${player[0].name}</span>
+              </div>
+              <div class="flex justify-center ">
+                <div class="pr-[1.5rem] border-r-2 border-[#e9cc74]/[0.1]">
+                  <div class="flex items-center text-[0.5rem] uppercase">
+                    <span class="font-bold mr-[0.3rem]">${player[0].pace}</span>
+                    <span class="font-light">PAC</span>
+                  </div>
+                  <div class="flex items-center text-[0.5rem] uppercase">
+                    <span class="font-bold mr-[0.3rem]">${player[0].shooting}</span>
+                    <span class="font-light">SHO</span>
+                  </div>
+                  <div class="flex items-center text-[0.5rem] uppercase">
+                    <span class="font-bold mr-[0.3rem]">${player[0].passing}</span>
+                    <span class="font-light">PAS</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex items-center text-[0.5rem] uppercase">
+                    <span class="font-bold mr-[0.3rem]">${player[0].dribbling}</span>
+                    <span class="font-light">DRI</span>
+                  </div>
+                  <div class="flex items-center text-[0.5rem] uppercase">
+                    <span class="font-bold mr-[0.3rem]">${player[0].defending}</span>
+                    <span class="font-light">DEF</span>
+                  </div>
+                  <div class="flex items-center text-[0.5rem] uppercase">
+                    <span class="font-bold mr-[0.3rem]">${player[0].physical}</span>
+                    <span class="font-light">PHY</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    `;
-console.log("player[0] :", player[0])
+      `;
+      ischanged=true;
 }
-function toggle() {
-  const position = document.getElementById('position').value;
-  const generalStats = document.getElementById('generalStats');
-  const goalkeeperStats = document.getElementById('goalkeeperStats');
-  
-  if (position === 'GK') {
-  generalStats.classList.add('hidden');
-  goalkeeperStats.classList.remove('hidden');
-  } else {
-  generalStats.classList.remove('hidden');
-  goalkeeperStats.classList.add('hidden');
-  }
-  }
 
- 
- 
-  
 
   function funcAjouter_Terrain(divCard,id) {
     var I = Allplayers.findIndex((player) => player.id == id);
     
     console.log("players",Allplayers)
     Allplayers.forEach(player => {
-      // console.log("index",typeof(player.id),typeof(id))
       if (player.id == id) {  
         switch (player.position) {
           case 'LW':
@@ -588,6 +622,7 @@ function toggle() {
                 terainPlayers.push(player);
                 localStorage.setItem("terainPlayers",JSON.stringify(terainPlayers))
                 div_LW.innerHTML=divCard.innerHTML 
+                
                 divCard.remove()
                 Allplayers.splice(I,1)
               } else {
@@ -768,12 +803,7 @@ function toggle() {
     document.getElementById('Bonne_touche').appendChild(joueur); 
   }
 
-  function modifierJoueur(element)
-  {
-    alert('Modifier',element);
-    toggleVisibility(modal_add_player)
-
-  }
+ 
   function suprimerJoueur(element)
   {
     console.log('suprimer',element.id);
@@ -781,56 +811,12 @@ function toggle() {
     updateLocalStroage(element,"sup")
   }
 
-  ///valider la forme de l'ajouter
-  function validateForm_Ajout(){
-    if (playerName.value === "" || playerName.value.length > 20) {
-      showErrorMessage(playerName, "Enter a valid name");
-    } else if (playerImage.value === "") {
-      showErrorMessage(playerImage, "you have to enter a valid url");
-    } else if (playerPosition.value === "none") {
-      showErrorMessage(playerPosition, "you have to choose a valid position");
-    } else if (playerNationality.value === "") {
-      showErrorMessage(playerNationality, "you have to enter a valid nationality");
-    } else if (playerClub.value === "") {
-    } else if (playerCountryFlag.value === "") {
-      showErrorMessage(playerNationality, "you have to enter a valid url");
-    } else if (playerClub.value === "") {
-      showErrorMessage(playerClub, "enter a valid logo url");
-    } else if (playerRating.value === "" || playerRating.value <= 0) {
-      showErrorMessage(playerRating, "invalid rating number");
-    } else if (playerPace.value === "" || playerPace.value <= 0) {
-      showErrorMessage(playerPace, "invalid pace number");
-    } else if (playerShooting.value === "" || playerShooting.value <= 0) {
-      showErrorMessage(playerShooting, "invalid shooting number");
-    } else if (playerPassing.value === "" || playerPassing.value <= 0) {
-      showErrorMessage(playerPassing, "invalid passing number");
-    } else if (playerDriblling.value === "" || playerDriblling.value <= 0) {
-      showErrorMessage(playerDriblling, "invalid dribling number");
-    } else if (playerDefending.value === "" || playerDefending.value <= 0) {
-      showErrorMessage(playerDefending, "invalid defendig number");
-    } else if (playerPhysical.value === "" || playerPhysical.value <= 0) {
-      showErrorMessage(playerPhysical, "invalid physical number");
-    } else {
-      addPlayerForm.reset();
-      alert("Ajouter Avec successfully")
-      toggleVisibility(modal_add_player);
-    }
-  };
-
-  function showErrorMessage(element, message) {
-    const inputControl = element.parentElement;
-    const displayError = inputControl.querySelector(".error-message");
-    displayError.innerHTML = message;
-  }
 
   // Ajouter nouveau joueur
-  document.getElementById("add-player-btn").addEventListener('click', (e) => {
-    e.preventDefault();
-    validateForm_Ajout();
-    addNewPlayer();
-  });
+  // const btnAjouterJoueur = document.getElementById("add-player-btn")
+
   function adapteForm() {
-    if (playerPosition.value === "gk") {
+    if (playerPosition.value === "GK") {
       playerPace.setAttribute("placeholder", "dividing");
       playerDriblling.setAttribute("placeholder", "handling");
       playerShooting.setAttribute("placeholder", "kicking");
@@ -869,8 +855,7 @@ function toggle() {
         physical: parseInt(playerPhysical.value),
       }
     }
-  
-    else {
+   else {
       newPlayer = {
       id : Allplayers.length+1,
       name: playerName.value,
@@ -890,10 +875,9 @@ function toggle() {
     }
     }
     updateLocalStroage(newPlayer,"add")
-    
   }
-  function updateLocalStroage(player,mod){
-    if(mod === "sup"){
+  function updateLocalStroage(player,typeAjoute) {
+    if(typeAjoute === "sup"){
       const index = Allplayers.findIndex(p => p.id == player.id);
       console.log(index);
       Allplayers.splice(index,1);
@@ -917,10 +901,9 @@ var play;
 function editPlayer(element) {
   let id = element.id;
   console.log("cardId",id)
-  modal.classList.remove("hidden");
-
-    addPlayerBtn.remove()
-    addPlayerForm.appendChild(updatePlayerBtn);
+  toggleVisibility(modal_add_player);
+    btnAjouterJoueur.remove()
+    modal_add_player.appendChild(updatePlayerBtn);
 
     for(let i = 0;i < Allplayers.length;i++){
       if (Allplayers[i].id == id) {

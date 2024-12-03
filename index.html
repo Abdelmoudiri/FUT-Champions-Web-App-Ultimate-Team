@@ -18,7 +18,8 @@
   <header class="bg-slate-500 p-2 rounded-md">
     <img src="./asset/img/team.png" class="w-[5%] h-[2%] mx-auto" alt="logo de mon site" />
   </header>
-
+  
+ 
   <!-- poopup de filtrer le joueur -->
   <section id="crud-modal" class="bg-black bg-opacity-75  items-center justify-center fixed inset-0 z-50  hidden ">
     <button id="btnClose" class="absolute top-2 right-2 text-white font-bold text-xl" aria-label="Close modal">
@@ -28,15 +29,7 @@
     <div id="div_choisi_joueur" class="grid grid-cols-3 gap-3 mx-auto bg-slate-900 w-fit">
     </div>
     <div class="flex justify-center">
-      <button id="btnAjoute" 
-        class="text-white mb-[2%] inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd"
-            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-            clip-rule="evenodd"></path>
-        </svg>
-        Ajouter Nouvelle joueur
-      </button>
+      
     </div>
   </section>
 
@@ -44,10 +37,10 @@
   <section
   class="hidden flex text-white flex-col px-4 py-5 bg-slate-600 rounded-md shadow-md fixed w-[90%] md:max-w-[500px] md:min-w-[300px] top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-10"
   id="add-player-modal">
-  <button type="button" id="close-btn"><img src="./assets/imgs/close.png" alt="close"
+  <button type="button" id="close-btn"><img src="./asset/img/close.png" alt="close"
           class="w-[30px] h-[30px] absolute right-4 top-2 "></button>
   <h2 class="text-lg mx-auto font-bold text-white mb-3">Add Player</h2>
-  <form action="" class="flex flex-col" id="add-player-form">
+  <form class="flex flex-col" id="form">
       <div class="grid grid-cols-2 gap-2">
           <div class="flex flex-col">
               <input id="f-name"
@@ -67,16 +60,15 @@
                   name="f-position" id="f-position" onchange="adapteForm()">
                   <option value="none">player position</option>
                   <option value="GK">GK</option>
-                  <option value="CBG">CB</option>
-                  <option value="CBD">CB</option>
+                  <option value="CBR">CBR</option>
+                  <option value="CBL">CBL</option>
                   <option value="LB">LB</option>
-                  <option value="CB">CB</option>
-                  <option value="CMD">CM</option>
-                  <option value="CMC">CM</option>
-                  <option value="CMD">CM</option>
+                  <option value="CM">CML</option>
+                  <option value="CMR">CML</option>
+                  <option value="CML">CM</option>
                   <option value="RW">RW</option>
                   <option value="ST">ST</option>
-                  <option value="ST">LW</option>
+                  <option value="LW">LW</option>
               </select>
               <div class="error-message text-red-600 text-sm font-semibold"></div>
           </div>
@@ -147,74 +139,80 @@
               <div class="error-message text-red-600 text-sm font-semibold"></div>
           </div>
       </div>
-      <button class="text-white bg-[#5ce1e6] px-2 py-1 rounded-md mt-2 focus:outline-none focus:border-none"
-          id="add-player-btn" type="submit">Add Player</button>
+      <button class="text-white bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded-md mt-2 focus:outline-none focus:border-none"
+          id="ajouter-joueur-btn" type="submit">Add Player</button>
 
   </form>
 
 </section>
 
-<div class="mb-4 text-center">
-  <label for="formation" class="text-lg">Choose Formation: </label>
-  <select id="formation" class="border p-2 rounded" onchange="changeFormation()">
-    <option value="433">4-3-3</option>
-    <option value="442">4-4-2</option>
-    <option value="352">3-5-2</option>
-  </select>
-</div>
+<section class="flex flex-wrap justify-around p-2">
+  <div class="mb-4 text-center">
+    <label for="formation" class="text-lg">Choose Formation: </label>
+    <select id="formation" class="border p-2 rounded" onchange="changeFormation()">
+      <option value="433">4-3-3</option>
+      <option value="442">4-4-2</option>
+      <option value="352">3-5-2</option>
+    </select>
+  </div>
+  <button id="afficher-modal" class="bg-blue-600 rounded-md px-4 text-white h-[35px] hover:bg-blue-700">
+    Ajouter Nouveau joueur
+  </button>
+  
+</section>
   <!-- main -->
-   <main class="grid   grid-cols-1 md:grid-cols-1 lg:grid-cols-4  p-3" style="perspective: 1000px;">
+   <main class="grid  grid-cols-1 md:grid-cols-1 lg:grid-cols-4  p-3" style="perspective: 1000px;">
 
-        <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center sm:w-screen md:w-screen lg:w-full  h-screen overflow-auto">
+        <section id="allplayerSection" class=" flex gap-2 flex-wrap justify-center scale-90 md:scale-100 md:w-screen lg:w-full  h-screen overflow-auto">
         </section>
 
-        <section style="transform: rotateX(20deg)" class=" grid grid-rows-4  col-span-2 bg-gray-300 bg-[url(./asset/img/pitch.svg)] rounded-md">
+        <section  class=" grid grid-rows-4  col-span-2 bg-gray-300 bg-[url(./asset/img/pitch.svg)] rounded-md">
          
           <!-- attaque -->
           <div class="flex justify-around " id="attaque">
             <!-- LW -->
-            <div id="LW" ondblclick="positionFliter('LW', this)" class="relative hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="LW" ondblclick="positionFliter('LW', this)" class="relative scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
             
             <!-- ST -->
             
-            <div id="ST" ondblclick="positionFliter('ST', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="ST" ondblclick="positionFliter('ST', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
             
             <!-- RW -->
-            <div id="RW" ondblclick="positionFliter('RW', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="RW" ondblclick="positionFliter('RW', this)" class="scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
           </div>
 
           <!-- milieu -->
           <div  class="flex justify-around " id="milieu">
             <!-- CM -->
-            <div id="CML" ondblclick="positionFliter('CML', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="CML" ondblclick="positionFliter('CML', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
-            <div id="CM" ondblclick="positionFliter('CM', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="CM" ondblclick="positionFliter('CM', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
-            <div id="CMR" ondblclick="positionFliter('CMR', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="CMR" ondblclick="positionFliter('CMR', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
             
           </div>
           <!-- diffence -->
           <div  class="flex justify-around " id="defense">
             <!-- LB -->
-            <div id="LB" ondblclick="positionFliter('LB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="LB" ondblclick="positionFliter('LB', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
             <!-- CB -->
-            <div id="CBL" ondblclick="positionFliter('CBL', this)" class=" hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="CBL" ondblclick="positionFliter('CBL', this)" class="scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
             <!-- CB -->
-            <div id="CBR" ondblclick="positionFliter('CBR', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="CBR" ondblclick="positionFliter('CBR', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
             <!-- RB -->
-            <div id="RB" ondblclick="positionFliter('RB', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="RB" ondblclick="positionFliter('RB', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
           </div>
           <!-- goal keeper -->
           <div class="flex justify-center">
-            <div id="pGK" ondblclick="positionFliter('GK', this)" class="hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
+            <div id="pGK" ondblclick="positionFliter('GK', this)" class=" scale-[0.75] md:scale-100 hover:shadow-sm hover:cursor-pointer w-[100px] h-[180px] bg-cover bg-center" style="background-image: url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png');">
             </div>
           </div>
 
